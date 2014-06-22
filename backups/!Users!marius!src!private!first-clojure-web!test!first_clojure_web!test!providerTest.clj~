@@ -1,9 +1,0 @@
-(ns first-clojure-web.test.handler
-  (:use clojure.test
-        ring.mock.request
-        first-clojure-web.handler))
-
-(deftest test-app
-  (testing "hello world"
-    (let [response (helloworld {:name "me"})]
-      (is (= (:name response) "me")))))
