@@ -83,7 +83,7 @@
 
 (global-set-key "\C-p" 'grunt)
 
-(setq grunt-cmd "grunt --no-color --config ~/grunt.js")
+(setq grunt-cmd "grunt make-js --config ~/grunt.conf")
  
 
 (defun grunt ()
