@@ -70,6 +70,12 @@
 ;; Find file in project
 (global-set-key (kbd "C-x o") 'find-file-in-project)
 
+;; Move windows, even in org-mode
+(global-set-key (kbd "<s-right>") 'windmove-right)
+(global-set-key (kbd "<s-left>") 'windmove-left)
+(global-set-key (kbd "<s-up>") 'windmove-up)
+(global-set-key (kbd "<s-down>") 'windmove-down)
+
 ;; Deletes file as well
 (defun delete-this-buffer-and-file ()
   "Removes file connected to current buffer and kills buffer."
@@ -84,6 +90,23 @@
         (kill-buffer buffer)
         (message "File '%s' successfully removed" filename)))))
 
+(global-set-key "\C-p" 'grunt)
+
+(setq grunt-cmd "grunt make-js --config ~/grunt.conf")
+ 
+
+(defun grunt ()
+  "Run grunt"
+  (interactive)
+  (let* ((grunt-buffer (get-buffer-create "*grunt*"))
+        (result (call-process-shell-command grunt-cmd nil grunt-buffer t))
+        (output (with-current-buffer grunt-buffer (buffer-string))))
+    (cond ((zerop result)
+           (message "Grunt completed without errors"))
+          (t
+           (message nil)
+           (split-window-vertically)
+           (set-window-buffer (next-window) grunt-buffer)))))
 
 (require 'appearance)
 
