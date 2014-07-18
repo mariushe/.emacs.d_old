@@ -27,7 +27,9 @@
 (defvar my-packages '(better-defaults
                       clojure-mode
                       clojure-test-mode
-                      cider))
+                      cider
+                      paredit
+                      rainbow-delimiters))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
@@ -47,6 +49,13 @@
 ;; Makes emacs run fullscreen
  '(initial-frame-alist (quote ((fullscreen . maximized)))))
 ;;
+
+;;;; CLOJURE MODE
+
+(add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'clojure-mode-hook 'paredit-mode)
+
+;;;;;;;;;;;;;;;;;
 
  ;; If there is more than one, they won't work right.
 (custom-set-faces
