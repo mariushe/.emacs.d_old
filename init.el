@@ -22,6 +22,14 @@
 (require 'package)
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/"))
+
+ (add-to-list 'package-archives 
+              '("melpa" . "http://melpa.milkbox.net/packages/"))
+
+(add-to-list 'package-archives 
+             '("org" . "http://orgmode.org/elpa/") 
+             t)
+
 (package-initialize)
 
 (defvar my-packages '(better-defaults
@@ -29,7 +37,9 @@
                       clojure-test-mode
                       cider
                       paredit
-                      rainbow-delimiters))
+                      rainbow-delimiters
+                      git-timemachine
+                      magit))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
@@ -69,6 +79,9 @@
 (require 'find-file-in-project)
 ;; Find file in project
 (global-set-key (kbd "C-x o") 'find-file-in-project)
+
+;; Magit
+(global-set-key (kbd "C-x G") 'magit-status)
 
 ;; Move windows, even in org-mode
 (global-set-key (kbd "<s-right>") 'windmove-right)
