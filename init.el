@@ -93,16 +93,16 @@
   "dummy")
 
 ;; the hook
-(defun show-magit-log-hook ()
-  (cd "..")
-  (magit-log)
-  (switch-to-buffer-other-window "COMMIT_EDITMSG"))
+;;(defun show-magit-log-hook ()
+;;  (cd "..")
+;;  (magit-log)
+;;  (switch-to-buffer-other-window "COMMIT_EDITMSG"))
 
 ;; add the hook
-(add-hook 'load-magit-log-when-committing-mode-hook 'show-magit-log-hook)
+;;(add-hook 'load-magit-log-when-committing-mode-hook 'show-magit-log-hook)
 
 ;; load the mode for commit message
-(add-to-list 'auto-mode-alist '("\\COMMIT_EDITMSG\\'" . load-magit-log-when-committing-mode))
+;;(add-to-list 'auto-mode-alist '("\\COMMIT_EDITMSG\\'" . load-magit-log-when-committing-mode))
 ;;(eval-after-load 'magit '(require 'setup-magit))
 
 ;; Move windows, even in org-mode
