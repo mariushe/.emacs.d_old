@@ -57,6 +57,8 @@
 
 (require 'personal-settings)
 
+(global-set-key (kbd "C-x C-j") 'butler-status)
+
 (setq is-mac (equal system-type 'darwin))
 (when is-mac (require 'mac))
 
