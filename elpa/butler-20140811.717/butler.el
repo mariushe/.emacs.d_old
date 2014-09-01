@@ -228,13 +228,13 @@
            (url (gethash 'url job))
            (auth (gethash 'auth server))
            (url-request-extra-headers `(("Authorization" . ,auth))))
-      (if (and url auth)
+ 
+     (if (and url auth)
           (deferred:$
-            (deferred:url-retrieve (concat url "build/"))
+            (print (deferred:url-post (concat url "build/")))
             (deferred:nextc it
               (lambda (buf)
                 (kill-buffer buf))))))))
-
 
 (defun hide-butler-job ()
   "Hides the job identified by the cursor position"
