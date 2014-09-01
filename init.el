@@ -42,13 +42,21 @@
                       magit
                       git-commit-mode
                       gitconfig-mode
-                      gitignore-mode))
+                      gitignore-mode
+                      butler))
+
+(require 'butler)
+
+
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
     (package-install p)))
 
 ;; My own
+
+(require 'personal-settings)
+
 (setq is-mac (equal system-type 'darwin))
 (when is-mac (require 'mac))
 
