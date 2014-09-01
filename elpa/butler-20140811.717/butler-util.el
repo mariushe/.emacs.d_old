@@ -36,9 +36,9 @@
 
 (defface butler-unstable
   '((((class color) (background light))
-     :foreground "yellow")
+     :foreground "purple")
     (((class color) (background dark))
-     :foreground "yellow"))
+     :foreground "purple"))
   "Face for unstable Butler jobs."
   :group 'butler)
 
