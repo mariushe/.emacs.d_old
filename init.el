@@ -47,6 +47,8 @@
 
 (require 'butler)
 
+(require 'nexus)
+
 
 
 (dolist (p my-packages)
@@ -58,6 +60,8 @@
 (require 'personal-settings)
 
 (global-set-key (kbd "C-x C-j") 'butler-status)
+
+(global-set-key (kbd "C-x C-n") 'nexus-search-keyword)
 
 (setq is-mac (equal system-type 'darwin))
 (when is-mac (require 'mac))
