@@ -43,11 +43,14 @@
                       git-commit-mode
                       gitconfig-mode
                       gitignore-mode
-                      butler))
+                      butler
+                      org-trello))
 
 (require 'butler)
 
 (require 'nexus)
+
+(require 'org-trello)
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
