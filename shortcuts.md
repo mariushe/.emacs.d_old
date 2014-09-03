@@ -7,3 +7,4 @@
 * `C-x` + `9`                     - enlarge-window-horizontally
 * `C-x` + `C-j`                   - butler-start (jenkins monitor)
 * `C-x` + `C-n`                   - nexus-search-keyword
+* `C-x` + `m`                     - magit-status
