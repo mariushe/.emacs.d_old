@@ -129,6 +129,7 @@
 (global-set-key (kbd "<s-up>") 'windmove-up)
 (global-set-key (kbd "<s-down>") 'windmove-down)
 
+
 ;; Enlarge window horizontally
 (global-set-key (kbd "C-x 9") 'enlarge-window-horizontally)
 (global-set-key (kbd "C-x 8") 'shrink-window-horizontally)
