@@ -5,6 +5,9 @@
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
+;; Add information about which column the cursor is currently on in the mode line
+(column-number-mode)
+
 ;; ref: https://github.com/magnars/.emacs.d
 
 ;; No splash screen please ... jeez
