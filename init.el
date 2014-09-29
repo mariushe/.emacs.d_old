@@ -46,14 +46,15 @@
                       git-commit-mode
                       gitconfig-mode
                       gitignore-mode
-                      butler
-                      org-trello))
+                      butler))
 
 (require 'butler)
 
 (require 'nexus)
 
 (require 'org-trello)
+
+
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
@@ -66,6 +67,8 @@
 (global-set-key (kbd "C-x C-j") 'butler-status)
 
 (global-set-key (kbd "C-x C-n") 'nexus-search-keyword)
+
+
 
 (setq is-mac (equal system-type 'darwin))
 (when is-mac (require 'mac))
@@ -110,29 +113,16 @@
 (define-minor-mode load-magit-log-when-committing-mode
   "dummy")
 
-;; the hook
-;;(defun show-magit-log-hook ()
-;;  (cd "..")
-;;  (magit-log)
-;;  (switch-to-buffer-other-window "COMMIT_EDITMSG"))
-
-;; add the hook
-;;(add-hook 'load-magit-log-when-committing-mode-hook 'show-magit-log-hook)
-
-;; load the mode for commit message
-;;(add-to-list 'auto-mode-alist '("\\COMMIT_EDITMSG\\'" . load-magit-log-when-committing-mode))
-;;(eval-after-load 'magit '(require 'setup-magit))
-
 ;; Move windows, even in org-mode
 (global-set-key (kbd "<s-right>") 'windmove-right)
 (global-set-key (kbd "<s-left>") 'windmove-left)
 (global-set-key (kbd "<s-up>") 'windmove-up)
 (global-set-key (kbd "<s-down>") 'windmove-down)
 
-
 ;; Enlarge window horizontally
 (global-set-key (kbd "C-x 9") 'enlarge-window-horizontally)
 (global-set-key (kbd "C-x 8") 'shrink-window-horizontally)
+
 ;; Deletes file as well
 (defun delete-this-buffer-and-file ()
   "Removes file connected to current buffer and kills buffer."
@@ -164,6 +154,22 @@
            (message nil)
            (split-window-vertically)
            (set-window-buffer (next-window) grunt-buffer)))))
+
+;; Agressive Auto-indentation
+(defun endless/indent-defun ()
+  "Indent current defun."
+  (interactive)
+  (let ((l (save-excursion (beginning-of-defun 1) (point)))
+        (r (save-excursion (end-of-defun 1) (point))))
+    (indent-region l r)))
+
+(defun endless/activate-aggressive-indent ()
+  "Locally add `endless/indent-defun' to `post-command-hook'."
+  (add-hook 'post-command-hook
+            #'endless/indent-defun nil 'local))
+
+(add-hook 'clojure-mode-hook
+          #'endless/activate-aggressive-indent)
 
 ;; Emacs server
 (require 'server)
