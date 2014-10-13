@@ -173,6 +173,7 @@
 
 ;; Emacs server
 (require 'server)
+(set-default 'server-socket-dir "~/.emacs.d/server")
 (unless (server-running-p)
   (server-start))
 
