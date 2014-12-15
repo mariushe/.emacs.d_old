@@ -5,6 +5,9 @@
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
+;; Add information about which column the cursor is currently on in the mode line
+(column-number-mode)
+
 ;; ref: https://github.com/magnars/.emacs.d
 
 ;; No splash screen please ... jeez
@@ -112,19 +115,6 @@
 (define-minor-mode load-magit-log-when-committing-mode
   "dummy")
 
-;; the hook
-;;(defun show-magit-log-hook ()
-;;  (cd "..")
-;;  (magit-log)
-;;  (switch-to-buffer-other-window "COMMIT_EDITMSG"))
-
-;; add the hook
-;;(add-hook 'load-magit-log-when-committing-mode-hook 'show-magit-log-hook)
-
-;; load the mode for commit message
-;;(add-to-list 'auto-mode-alist '("\\COMMIT_EDITMSG\\'" . load-magit-log-when-committing-mode))
-;;(eval-after-load 'magit '(require 'setup-magit))
-
 ;; Move windows, even in org-mode
 (global-set-key (kbd "<s-right>") 'windmove-right)
 (global-set-key (kbd "<s-left>") 'windmove-left)
@@ -134,6 +124,7 @@
 ;; Enlarge window horizontally
 (global-set-key (kbd "C-x 9") 'enlarge-window-horizontally)
 (global-set-key (kbd "C-x 8") 'shrink-window-horizontally)
+
 ;; Deletes file as well
 (defun delete-this-buffer-and-file ()
   "Removes file connected to current buffer and kills buffer."
@@ -166,8 +157,25 @@
            (split-window-vertically)
            (set-window-buffer (next-window) grunt-buffer)))))
 
+;; Agressive Auto-indentation
+(defun endless/indent-defun ()
+  "Indent current defun."
+  (interactive)
+  (let ((l (save-excursion (beginning-of-defun 1) (point)))
+        (r (save-excursion (end-of-defun 1) (point))))
+    (indent-region l r)))
+
+(defun endless/activate-aggressive-indent ()
+  "Locally add `endless/indent-defun' to `post-command-hook'."
+  (add-hook 'post-command-hook
+            #'endless/indent-defun nil 'local))
+
+(add-hook 'clojure-mode-hook
+          #'endless/activate-aggressive-indent)
+
 ;; Emacs server
 (require 'server)
+(set-default 'server-socket-dir "~/.emacs.d/server")
 (unless (server-running-p)
   (server-start))
 
