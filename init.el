@@ -40,7 +40,6 @@
                       cider
                       paredit
                       rainbow-delimiters
-                      git-timemachine
                       magit
                       git-commit-mode
                       gitconfig-mode
