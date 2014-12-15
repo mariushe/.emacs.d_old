@@ -20,15 +20,14 @@
 
 ;; ref: http://clojure-doc.org/articles/tutorials/emacs.html
 (require 'package)
+;;(add-to-list 'package-archives
+;;             '("marmalade" . "http://marmalade-repo.org/packages/"))
+
 (add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
-
- (add-to-list 'package-archives 
-              '("melpa" . "http://melpa.milkbox.net/packages/"))
-
-(add-to-list 'package-archives 
-             '("org" . "http://orgmode.org/elpa/") 
-             t)
+             '("melpa" . "http://melpa.org/packages/") t)
+;;(add-to-list 'package-archives 
+;;             '("org" . "http://orgmode.org/elpa/") 
+;;             t)
 
 (package-initialize)
 
@@ -44,13 +43,15 @@
                       gitconfig-mode
                       gitignore-mode
                       butler
-                      org-trello))
+                      json-reformat))
 
 (require 'butler)
 
 (require 'nexus)
 
 (require 'org-trello)
+
+(require 'restclient)
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
@@ -63,6 +64,10 @@
 (global-set-key (kbd "C-x C-j") 'butler-status)
 
 (global-set-key (kbd "C-x C-n") 'nexus-search-keyword)
+
+(global-set-key (kbd "C-x C-r") 'restclient-mode)
+
+(global-set-key (kbd "C-x C-t") 'json-reformat-region)
 
 (setq is-mac (equal system-type 'darwin))
 (when is-mac (require 'mac))
